@@ -166,49 +166,7 @@ footer{
   border-top: 1px solid rgba(0,0,0,0.08);
   z-index: 2000; /* header보다 아래여도 되고, 위여도 됨 */
 }
- /* ===== Lightbox ===== */
-.photo{ cursor:pointer; display:flex; align-items:center; justify-content:center; color:#999; }
 
-.lightbox{
-  position:fixed; inset:0;
-  background:rgba(0,0,0,.85);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:4000;
-  padding:20px;
-}
-.lightbox.active{ display:flex; }
-
-.lightbox-inner{
-  position:relative;
-  max-width:95vw;
-  max-height:95vh;
-  text-align:center;
-}
-
-.lightbox-close{
-  position:absolute;
-  top:-10px; right:-10px;
-  width:36px; height:36px;
-  border-radius:999px;
-  border:none;
-  background:#fff;
-  cursor:pointer;
-}
-
-#lightboxImg{
-  max-width:95vw;
-  max-height:80vh;
-  border-radius:10px;
-  display:none;
-}
-#lightboxMsg{
-  color:#fff;
-  margin-top:12px;
-  font-size:14px;
-  opacity:.9;
-}
     <script>
   // 기존 탭 스크립트 아래에 추가 👇
 
