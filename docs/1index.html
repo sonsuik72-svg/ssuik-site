@@ -146,6 +146,26 @@
       background: #f5f5f5;
       border-top: 1px solid rgba(0,0,0,0.06);
     }
+    /* ✅ footer를 화면 하단에 고정 + 본문이 footer에 안 가려지게 */
+body{
+  padding-bottom: 80px; /* footer 높이만큼 여유 */
+}
+
+footer{
+  position: fixed !important;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  margin: 0 !important;
+
+  text-align: center;
+  padding: 14px 10px;
+  font-size: 0.85rem;
+  color: #777;
+  background: #f5f5f5;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  z-index: 2000; /* header보다 아래여도 되고, 위여도 됨 */
+}
   </style>
 </head>
 
