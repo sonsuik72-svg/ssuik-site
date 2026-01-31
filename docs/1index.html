@@ -213,6 +213,22 @@
 <footer>
   © 2026 여행하는 수익 · All rights reserved
 </footer>
+<script>
+const tabs = document.querySelectorAll('.menu a');
+const contents = document.querySelectorAll('.tab-content');
 
+tabs.forEach(tab => {
+  tab.addEventListener('click', function(e){
+    e.preventDefault();
+    const target = this.getAttribute('data-tab');
+
+    contents.forEach(c => c.classList.remove('active'));
+    document.getElementById(target).classList.add('active');
+  });
+});
+
+// 처음 열리면 홈 표시
+document.getElementById('home').classList.add('active');
+</script>
 </body>
 </html>
