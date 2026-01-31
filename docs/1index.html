@@ -166,6 +166,25 @@ footer{
   border-top: 1px solid rgba(0,0,0,0.08);
   z-index: 2000; /* header보다 아래여도 되고, 위여도 됨 */
 }
+    <script>
+  // 기존 탭 스크립트 아래에 추가 👇
+
+  const photos = document.querySelectorAll('.photo img');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  photos.forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightbox.classList.add('active');
+    });
+  });
+
+  lightbox.addEventListener('click', () => {
+    lightbox.classList.remove('active');
+    lightboxImg.src = '';
+  });
+</script>
   </style>
 </head>
 
@@ -261,6 +280,9 @@ footer{
   // 첫 화면은 홈
   document.getElementById('home').classList.add('active');
 </script>
-
+<!-- 이미지 크게 보기 레이어 -->
+<div id="lightbox" class="lightbox">
+  <img id="lightbox-img" src="" alt="">
+</div>
 </body>
 </html>
