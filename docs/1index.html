@@ -201,20 +201,23 @@
   const tabs = document.querySelectorAll('.menu a');
   const contents = document.querySelectorAll('.tab-content');
 
-  function showTab(id) {
-    contents.forEach(c => c.classList.remove('active'));
-    const target = document.getElementById(id);
-    if (target) target.classList.add('active');
-  }
-
   tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      showTab(tab.dataset.tab);
+    tab.addEventListener('click', function (e) {
+      e.preventDefault(); // ⭐ 스크롤 완전 차단
+
+      const targetId = this.dataset.tab;
+
+      contents.forEach(c => c.classList.remove('active'));
+
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.classList.add('active');
+      }
     });
   });
 
-  // 처음 로딩 시 홈 표시
-  showTab('home');
+  // 첫 화면은 홈
+  document.getElementById('home').classList.add('active');
 </script>
 
 </body>
