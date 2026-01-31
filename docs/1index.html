@@ -9,11 +9,18 @@
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
+    /* ✅ footer 겹침 방지: 페이지를 세로 레이아웃으로 구성 */
+    html, body { height: 100%; }
+
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
       background: #f5f5f5;
       color: #222;
+
+      /* ✅ 핵심: footer를 아래로 밀기 */
+      display: flex;
+      flex-direction: column;
     }
 
     /* ===== 헤더 & 메뉴 ===== */
@@ -57,6 +64,10 @@
       max-width: 1100px;
       margin: 0 auto;
       padding: 120px 20px 60px;
+
+      /* ✅ 핵심: 남은 공간을 차지해서 footer가 아래로 내려가게 */
+      flex: 1;
+      width: 100%;
     }
 
     .tab-content {
@@ -73,9 +84,7 @@
       to { opacity: 1; }
     }
 
-    h2 {
-      margin-top: 0;
-    }
+    h2 { margin-top: 0; }
 
     .btn {
       display: inline-block;
@@ -109,22 +118,34 @@
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 10px;
       margin-top: 20px;
+      margin-bottom: 30px;
     }
 
     .photo {
       background: #ddd;
-      height: 140px;
-      border-radius: 8px;
+      height: 160px;
+      border-radius: 10px;
+      overflow: hidden;
     }
 
+    /* ✅ 이미지가 박스에 맞게 예쁘게 */
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ✅ footer는 항상 아래, 겹침 방지 */
     footer {
-  text-align: center;
-  padding: 40px 20px;
-  font-size: 0.85rem;
-  color: #777;
-  background: #f5f5f5;
-  margin-top: 60px;
-}
+      position: static !important;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 0.85rem;
+      color: #777;
+      background: #f5f5f5;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
   </style>
 </head>
 
@@ -152,7 +173,7 @@
     <p>여행하는 수익 유튜브 공식 홈페이지입니다.</p>
     <a class="btn"
        href="https://www.youtube.com/channel/UCQJmzKsydaJjVbqpwJp2Cww"
-       target="_blank">
+       target="_blank" rel="noopener">
       유튜브 채널 바로가기
     </a>
   </div>
@@ -177,25 +198,25 @@
     <p>최신 여행 영상은 유튜브에서 확인하세요.</p>
     <a class="btn"
        href="https://www.youtube.com/channel/UCQJmzKsydaJjVbqpwJp2Cww"
-       target="_blank">
+       target="_blank" rel="noopener">
       유튜브 바로가기
     </a>
   </div>
 
+  <!-- ✅ 포토: photo1~4.jpg가 docs/images/ 에 있어야 함 -->
   <div class="tab-content" id="photo">
-  <h2>포토</h2>
-  <p class="muted">여행 중 기록한 사진들입니다.</p>
-
- <div class="photos">
-  <div class="photo">
-    <img src="images/photo2.jpg">
+    <h2>포토</h2>
+    <div class="photos">
+      <div class="photo"><img src="images/photo1.jpg" alt="photo1"></div>
+      <div class="photo"><img src="images/photo2.jpg" alt="photo2"></div>
+      <div class="photo"><img src="images/photo3.jpg" alt="photo3"></div>
+      <div class="photo"><img src="images/photo4.jpg" alt="photo4"></div>
+    </div>
   </div>
+
 </div>
 
-<div class="tab-content" id="photo">
-  ...
-</div>
-
+<!-- ✅ footer는 container 밖(중요!) -->
 <footer>
   © 2026 여행하는 수익 · All rights reserved
 </footer>
@@ -207,16 +228,13 @@
 
   tabs.forEach(tab => {
     tab.addEventListener('click', function (e) {
-      e.preventDefault(); // ⭐ 스크롤 완전 차단
-
+      e.preventDefault();
       const targetId = this.dataset.tab;
 
       contents.forEach(c => c.classList.remove('active'));
 
       const target = document.getElementById(targetId);
-      if (target) {
-        target.classList.add('active');
-      }
+      if (target) target.classList.add('active');
     });
   });
 
